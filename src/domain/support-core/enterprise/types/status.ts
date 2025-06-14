@@ -1,3 +1,3 @@
 export enum Status {
-    ATIVO, INATIVO
+    ACTIVE, INACTIVE
 }

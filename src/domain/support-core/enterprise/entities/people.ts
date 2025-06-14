@@ -11,75 +11,75 @@ export interface PeopleProps {
     cpf: string
     email: string
     peopleType: PeopleType
-    createdAt?: Date
-    updatedAt?: Date
-    status?: Status
+    createdAt?: Date | null
+    updatedAt?: Date | null
+    status?: Status | null
 }
 
 export class People extends EntityBase<PeopleProps> {
 
     get name() {
-        return this.name
+        return this.props.name
     }
 
     set name(name: string) {
         this.updatePropries()
-        this.name = name
+        this.props.name = name
     }
 
     get enterprise() {
-        return this.enterprise
+        return this.props.enterprise
     }
 
     set enterprise(enterprise: string) {
         this.updatePropries()
-        this.enterprise = enterprise
+        this.props.enterprise = enterprise
     }
 
     get phone() {
-        return this.phone
+        return this.props.phone
     }
 
     set phone(phone: string) {
         this.updatePropries()
-        this.phone = phone
+        this.props.phone = phone
     }
 
     get cpf() {
-        return this.cpf
+        return this.props.cpf
     }
 
     get email() {
-        return this.email
+        return this.props.email
     }
 
     get peopleType() {
-        return this.peopleType
+        return this.props.peopleType
     }
 
     get createdAt() {
-        return this.createdAt
+        return this.props.createdAt
     }
 
     get updatedAt() {
-        return this.updatedAt
+        return this.props.updatedAt!
     }
 
     set updatedAt(updatedAt: Date) {
-        this.updatedAt = updatedAt
+        this.props.updatedAt = updatedAt
     }
 
     get status() {
-        return this.status
+        return this.props.status!
     }
 
     set status(status: Status) {
         this.updatePropries()
-        this.status = status
+        this.props.status = status
     }
 
     updatePropries() {
-        this.updatedAt = new Date()
+        this.props.updatedAt = new Date()
     }
 
     static create(props: PeopleProps, id?: UniqueEntityId) {
@@ -92,7 +92,7 @@ export class People extends EntityBase<PeopleProps> {
             peopleType: props.peopleType,
             createdAt: props.createdAt ?? new Date(),
             updatedAt: props.updatedAt ?? new Date(),
-            status: props.status ?? Status.ATIVO
+            status: props.status ?? Status.ACTIVE
         }, 
         id ?? new UniqueEntityId())
     }

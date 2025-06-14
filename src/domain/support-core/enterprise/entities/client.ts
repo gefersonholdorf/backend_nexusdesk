@@ -10,12 +10,12 @@ export interface ClientProps {
 export class Client extends EntityBase<ClientProps> {
 
     get client() {
-        return this.client
+        return this.props.client
     }
 
     static create(props: ClientProps, id?: UniqueEntityId) {
         return new Client({
-            client: props.client,
+            client:  props.client,
         }, 
         id ?? new UniqueEntityId())
     }

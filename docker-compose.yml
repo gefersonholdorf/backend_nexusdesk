@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: nexusdesk_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: nexusdesk
+      MYSQL_DATABASE: nexusdesk
+      MYSQL_USER: nexus
+      MYSQL_PASSWORD: desk
+    ports:
+      - "3309:3306"
+

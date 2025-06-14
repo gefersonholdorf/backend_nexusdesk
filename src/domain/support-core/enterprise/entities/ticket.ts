@@ -10,59 +10,59 @@ export interface TicketProps {
     summary: string
     ticketStatus?: TicketStatus
     client: Client
-    operator?: Operator | null
-    createdAt?: Date
-    updatedAt?: Date
-    status?: Status
+    operator?: Operator | null 
+    createdAt?: Date | null 
+    updatedAt?: Date | null 
+    status?: Status | null 
 }
 
 export class Ticket extends EntityBase<TicketProps> {
 
     get summary() {
-        return this.summary
+        return this.props.summary
     }
 
     get ticketStatus() {
-        return this.ticketStatus
+        return this.props.ticketStatus!
     }
 
     set ticketStatus(ticketStatus: TicketStatus) {
         this.updatePropries()
-        this.ticketStatus = ticketStatus
+        this.props.ticketStatus = ticketStatus
     }
 
     get operator() {
-        return this.operator
+        return this.props.operator!
     }
 
     set operator(operator: Operator) {
         this.updatePropries()
-        this.operator = operator
+        this.props.operator = operator
     }
 
     get createdAt() {
-        return this.createdAt
+        return this.props.createdAt
     }
 
     get updatedAt() {
-        return this.updatedAt
+        return this.props.updatedAt!
     }
 
     set updatedAt(updatedAt: Date) {
-        this.updatedAt = updatedAt
+        this.props.updatedAt = updatedAt
     }
 
     get status() {
-            return this.status
-        }
+        return this.props.status!
+    }
     
     set status(status: Status) {
         this.updatePropries()
-        this.status = status
+        this.props.status = status
     }
 
     updatePropries() {
-        this.updatedAt = new Date()
+        this.props.updatedAt = new Date()
     }
 
     static create(props: TicketProps, id?: UniqueEntityId) {
@@ -73,7 +73,7 @@ export class Ticket extends EntityBase<TicketProps> {
             operator: props.operator ?? null,
             createdAt: props.createdAt ?? new Date(),
             updatedAt: props.updatedAt ?? new Date(),
-            status: props.status ?? Status.ATIVO
+            status: props.status ?? Status.ACTIVE
         }, 
         id ?? new UniqueEntityId())
     }

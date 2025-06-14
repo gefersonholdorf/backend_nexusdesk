@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model peoples {
+  id                                   Int                @id @default(autoincrement())
+  name                                 String             @db.VarChar(100)
+  enterprise                           String             @db.VarChar(100)
+  phone                                String             @db.VarChar(20)
+  cpf                                  String             @unique(map: "cpf") @db.VarChar(14)
+  email                                String             @unique(map: "email") @db.VarChar(100)
+  peopleType                           peoples_peopleType
+  status                               peoples_status?    @default(ACTIVE)
+  createdAt                            DateTime?          @default(now()) @db.DateTime(0)
+  updatedAt                            DateTime?          @default(now()) @db.DateTime(0)
+  tickets_tickets_client_idTopeoples   tickets[]          @relation("tickets_client_idTopeoples")
+  tickets_tickets_operator_idTopeoples tickets[]          @relation("tickets_operator_idTopeoples")
+}
+
+model tickets {
+  id                                   Int             @id @default(autoincrement())
+  summary                              String          @db.VarChar(150)
+  description                          String          @db.VarChar(255)
+  ticketStatus                         Int             @default(1) @db.TinyInt
+  client_id                            Int
+  operator_id                          Int?
+  status                               tickets_status? @default(ACTIVE)
+  createdAt                            DateTime?       @default(now()) @db.DateTime(0)
+  updatedAt                            DateTime?       @default(now()) @db.DateTime(0)
+  peoples_tickets_client_idTopeoples   peoples         @relation("tickets_client_idTopeoples", fields: [client_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ticket_client")
+  peoples_tickets_operator_idTopeoples peoples?        @relation("tickets_operator_idTopeoples", fields: [operator_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ticket_operator")
+
+  @@index([client_id], map: "fk_ticket_client")
+  @@index([operator_id], map: "fk_ticket_operator")
+}
+
+enum peoples_peopleType {
+  OPERATOR
+  CLIENT
+}
+
+enum tickets_status {
+  ACTIVE
+  INACTIVE
+  PENDING
+}
+
+enum peoples_status {
+  ACTIVE
+  INACTIVE
+}

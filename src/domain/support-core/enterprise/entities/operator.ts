@@ -10,7 +10,7 @@ export interface OperatorProps {
 export class Operator extends EntityBase<OperatorProps> {
 
     get operator() {
-        return this.operator
+        return this.props.operator
     }
 
     static create(props: OperatorProps, id?: UniqueEntityId) {

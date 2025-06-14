@@ -1,0 +1,34 @@
+USE nexusdesk;
+
+CREATE TABLE peoples (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    enterprise VARCHAR(100) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    peopleType ENUM('OPERATOR', 'CLIENT') NOT NULL,
+    status ENUM('ACTIVE', 'INACTIVE') DEFAULT 'ACTIVE',
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE tickets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    summary VARCHAR(150) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    
+    ticketStatus TINYINT NOT NULL DEFAULT 1,
+    
+    client_id INT NOT NULL,
+    operator_id INT NULL,
+    
+    status ENUM('ACTIVE', 'INACTIVE', 'PENDING') DEFAULT 'ACTIVE',
+    
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    CONSTRAINT fk_ticket_client FOREIGN KEY (client_id) REFERENCES peoples(id),
+    CONSTRAINT fk_ticket_operator FOREIGN KEY (operator_id) REFERENCES peoples(id)
+);
+

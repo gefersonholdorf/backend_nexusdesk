@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common"
-import { right, type Either } from "src/core/exceptions/either"
-import { ClientRepository } from "../../repositories/client-repository"
+import { right, Either } from "src/core/exceptions/either"
 import { Client } from "src/domain/support-core/enterprise/entities/client"
 import { People } from "src/domain/support-core/enterprise/entities/people"
 import { PeopleType } from "src/domain/support-core/enterprise/types/people-type"
+import { PeopleRepository } from "../../repositories/people-repository"
 
 export interface CreateClientUseCaseRequest {
     name: string
@@ -18,7 +18,7 @@ export type CreateClientUseCaseResponse = Either<never, {}>
 @Injectable()
 export class CreateClientUseCase {
     constructor(
-        private readonly clientRepository: ClientRepository
+        private readonly clientRepository: PeopleRepository
     ) {}
 
     async execute(data: CreateClientUseCaseRequest): Promise<CreateClientUseCaseResponse> {
