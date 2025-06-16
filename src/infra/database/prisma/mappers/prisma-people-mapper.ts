@@ -59,7 +59,7 @@ export class PrismaPeopleMapper {
                 status: prismaPeople.status == "ACTIVE" ? Status.ACTIVE : Status.INACTIVE,
                 createdAt: prismaPeople.createdAt,
                 updatedAt: prismaPeople.updatedAt,
-                peopleType: PeopleType.CLIENT
+                peopleType: PeopleType.OPERATOR
             }, new UniqueEntityId(prismaPeople.id))
         }, new UniqueEntityId(prismaPeople.id))
     }

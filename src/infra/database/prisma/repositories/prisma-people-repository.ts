@@ -20,17 +20,18 @@ export class PrismaPeopleRepository implements PeopleRepository {
         await this.prisma.peoples.create({data})
     }
 
-    async findById(id: number): Promise<Client | Operator | null> {
+    async findById(id: number, type: TypePeople): Promise<Client | Operator | null> {
         const people = await this.prisma.peoples.findUnique({
             where: {
-                id
+                id,
+                peopleType: `${type}`
             }
         })
 
         if(!people) {
             return null
         }
-
+        
         return PrismaPeopleMapper.toDomain(people)
     }
 

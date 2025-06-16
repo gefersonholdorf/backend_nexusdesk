@@ -21,7 +21,7 @@ export class GetClientByIdUseCase {
     async execute(data: GetClientByIdUseCaseRequest): Promise<GetClientByIdUseCaseResponse> {
         const { id } = data
 
-        const people = await this.clientRepository.findById(id) as Client
+        const people = await this.clientRepository.findById(id, 'CLIENT') as Client
 
         if(!people) {
             return left(new ResourceNotFoundError('Client not found.'))

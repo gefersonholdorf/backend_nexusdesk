@@ -23,7 +23,7 @@ export class UpdateOperatorUseCase {
     async execute(data: UpdateOperatorUseCaseRequest): Promise<UpdateOperatorUseCaseResponse> {
         const {id, name, enterprise, phone, status} = data
 
-        const people = await this.operatorRepository.findById(id) as Operator
+        const people = await this.operatorRepository.findById(id, 'OPERATOR') as Operator
 
         if(!people) {
             return left(new ResourceNotFoundError('Operator not found.'))

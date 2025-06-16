@@ -24,7 +24,7 @@ export class UpdateClientUseCase {
     async execute(data: UpdateClientUseCaseRequest): Promise<UpdateClientUseCaseResponse> {
         const {id, name, enterprise, phone, status} = data
 
-        const people = await this.clientRepository.findById(id) as Client
+        const people = await this.clientRepository.findById(id, 'CLIENT') as Client
 
         if(!people) {
             return left(new ResourceNotFoundError('Client not found.'))

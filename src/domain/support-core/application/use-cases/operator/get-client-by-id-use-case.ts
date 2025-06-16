@@ -21,7 +21,7 @@ export class GetOperatorByIdUseCase {
     async execute(data: GetOperatorByIdUseCaseRequest): Promise<GetOperatorByIdUseCaseResponse> {
         const { id } = data
 
-        const people = await this.operatorRepository.findById(id) as Operator
+        const people = await this.operatorRepository.findById(id, 'OPERATOR') as Operator
 
         if(!people) {
             return left(new ResourceNotFoundError('Operator not found.'))
