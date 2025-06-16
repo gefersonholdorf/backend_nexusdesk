@@ -19,7 +19,7 @@ export class PrismaPeopleMapper {
     }
   }
     
-    static toHttp(people: Client | Operator): Prisma.peoplesCreateManyInput {
+    static toPrisma(people: Client | Operator): Prisma.peoplesCreateManyInput {
         const person = people instanceof Client ? people.client : people.operator
 
         return {
@@ -46,7 +46,7 @@ export class PrismaPeopleMapper {
                     createdAt: prismaPeople.createdAt,
                     updatedAt: prismaPeople.updatedAt,
                     peopleType: PeopleType.CLIENT
-                })
+                }, new UniqueEntityId(prismaPeople.id))
             }, new UniqueEntityId(prismaPeople.id))
         }
         return Operator.create({
@@ -60,7 +60,7 @@ export class PrismaPeopleMapper {
                 createdAt: prismaPeople.createdAt,
                 updatedAt: prismaPeople.updatedAt,
                 peopleType: PeopleType.CLIENT
-            })
+            }, new UniqueEntityId(prismaPeople.id))
         }, new UniqueEntityId(prismaPeople.id))
     }
 }

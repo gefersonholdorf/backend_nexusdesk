@@ -4,6 +4,8 @@ import { Client } from "src/domain/support-core/enterprise/entities/client";
 import { Operator } from "src/domain/support-core/enterprise/entities/operator";
 import { PrismaPeopleMapper } from "../mappers/prisma-people-mapper";
 import { PrismaService } from "../prisma.service";
+import type { PeopleType } from "src/domain/support-core/enterprise/types/people-type";
+import type { TypePeople } from "src/core/repositories/type-people";
 
 @Injectable()
 export class PrismaPeopleRepository implements PeopleRepository {
@@ -13,7 +15,7 @@ export class PrismaPeopleRepository implements PeopleRepository {
     ) {}
 
     async create(people: Client | Operator): Promise<void> {
-        const data = PrismaPeopleMapper.toHttp(people)
+        const data = PrismaPeopleMapper.toPrisma(people)
 
         await this.prisma.peoples.create({data})
     }
@@ -60,12 +62,22 @@ export class PrismaPeopleRepository implements PeopleRepository {
         return PrismaPeopleMapper.toDomain(people)
     }
 
-    findAll(): Promise<Client[] | Operator[]> {
-        throw new Error("Method not implemented.");
+    async findAll(type: TypePeople): Promise<Client[] | Operator[]> {
+        const peoples = await this.prisma.peoples.findMany({
+            where: {
+                peopleType: `${type}`
+            }
+        })
+
+        if (type === "CLIENT") {
+            return peoples.map((people) => PrismaPeopleMapper.toDomain(people) as Client);
+        }
+
+        return peoples.map((people) => PrismaPeopleMapper.toDomain(people) as Operator);
     }
 
     async save(people: Client | Operator, id: number): Promise<void> {
-        const data = PrismaPeopleMapper.toHttp(people)
+        const data = PrismaPeopleMapper.toPrisma(people)
 
         await this.prisma.peoples.update(
             {
