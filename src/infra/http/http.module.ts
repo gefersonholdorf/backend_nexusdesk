@@ -16,6 +16,8 @@ import { CreateOperatorUseCase } from "src/domain/support-core/application/use-c
 import { UpdateOperatorUseCase } from "src/domain/support-core/application/use-cases/operator/update-operator-use-case";
 import { GetOperatorByIdUseCase } from "src/domain/support-core/application/use-cases/operator/get-client-by-id-use-case";
 import { FetchOperatorsUseCase } from "src/domain/support-core/application/use-cases/operator/fetch-operators-use-case";
+import { CreateTicketController } from "./controllers/tickets/create-ticket-controller";
+import { CreateTicketUseCase } from "src/domain/support-core/application/use-cases/ticket/create-ticket-use-case";
 
 @Module({
     imports: [
@@ -23,11 +25,13 @@ import { FetchOperatorsUseCase } from "src/domain/support-core/application/use-c
     ],
     controllers: [
         CreateClientController, UpdateClientController, GetClientByIdController, FetchClientsController,
-        CreateOperatorController, UpdateOperatorController, GetOperatorByIdController, FetchOperatorsController
+        CreateOperatorController, UpdateOperatorController, GetOperatorByIdController, FetchOperatorsController,
+        CreateTicketController
     ],
     providers: [
         CreateClientUseCase, UpdateClientUseCase, GetClientByIdUseCase, FetchClientsUseCase,
-        CreateOperatorUseCase, UpdateOperatorUseCase, GetOperatorByIdUseCase, FetchOperatorsUseCase
+        CreateOperatorUseCase, UpdateOperatorUseCase, GetOperatorByIdUseCase, FetchOperatorsUseCase,
+        CreateTicketUseCase
     ]
 })
 export class HttpModule{}

@@ -1,4 +1,4 @@
-import type { TypePeople } from "src/core/repositories/type-people";
+import { TypePeople } from "src/core/repositories/type-people";
 import { Client } from "../../enterprise/entities/client";
 import { Operator } from "../../enterprise/entities/operator";
 

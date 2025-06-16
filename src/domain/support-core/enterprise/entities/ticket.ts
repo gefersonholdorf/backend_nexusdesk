@@ -8,8 +8,11 @@ import { Status } from "../types/status";
 export interface TicketProps {
     id?: UniqueEntityId,
     summary: string
+    description: string,
     ticketStatus?: TicketStatus
-    client: Client
+    clientId: UniqueEntityId
+    client?: Client | null
+    operatorId?: UniqueEntityId | null
     operator?: Operator | null 
     createdAt?: Date | null 
     updatedAt?: Date | null 
@@ -22,6 +25,10 @@ export class Ticket extends EntityBase<TicketProps> {
         return this.props.summary
     }
 
+    get description() {
+        return this.props.description
+    }
+
     get ticketStatus() {
         return this.props.ticketStatus!
     }
@@ -31,6 +38,10 @@ export class Ticket extends EntityBase<TicketProps> {
         this.props.ticketStatus = ticketStatus
     }
 
+    get operatorId() {
+        return this.props.operatorId
+    }
+
     get operator() {
         return this.props.operator!
     }
@@ -38,6 +49,10 @@ export class Ticket extends EntityBase<TicketProps> {
     set operator(operator: Operator) {
         this.updatePropries()
         this.props.operator = operator
+    }
+
+    get clientId() {
+        return this.props.clientId
     }
 
     get createdAt() {
@@ -68,8 +83,11 @@ export class Ticket extends EntityBase<TicketProps> {
     static create(props: TicketProps, id?: UniqueEntityId) {
         return new Ticket({
             summary: props.summary,
+            description: props.description,
             ticketStatus: props.ticketStatus ?? TicketStatus.EM_ABERTO,
-            client: props.client,
+            clientId: props.clientId,
+            client: props.client ?? null,
+            operatorId: props.operatorId ?? null,
             operator: props.operator ?? null,
             createdAt: props.createdAt ?? new Date(),
             updatedAt: props.updatedAt ?? new Date(),

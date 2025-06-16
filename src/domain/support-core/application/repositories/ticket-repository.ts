@@ -1,4 +1,4 @@
-import type { Ticket } from "../../enterprise/entities/ticket";
+import { Ticket } from "../../enterprise/entities/ticket";
 
 export abstract class TicketRepository {
     abstract create(ticket: Ticket): Promise<void>

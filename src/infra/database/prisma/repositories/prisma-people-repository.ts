@@ -1,11 +1,10 @@
 import { Injectable } from "@nestjs/common";
+import type { TypePeople } from "src/core/repositories/type-people";
 import { PeopleRepository } from "src/domain/support-core/application/repositories/people-repository";
 import { Client } from "src/domain/support-core/enterprise/entities/client";
 import { Operator } from "src/domain/support-core/enterprise/entities/operator";
 import { PrismaPeopleMapper } from "../mappers/prisma-people-mapper";
 import { PrismaService } from "../prisma.service";
-import type { PeopleType } from "src/domain/support-core/enterprise/types/people-type";
-import type { TypePeople } from "src/core/repositories/type-people";
 
 @Injectable()
 export class PrismaPeopleRepository implements PeopleRepository {
