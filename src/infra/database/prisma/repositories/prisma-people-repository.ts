@@ -63,9 +63,20 @@ export class PrismaPeopleRepository implements PeopleRepository {
     findAll(): Promise<Client[] | Operator[]> {
         throw new Error("Method not implemented.");
     }
-    save(people: Client | Operator, id: number): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async save(people: Client | Operator, id: number): Promise<void> {
+        const data = PrismaPeopleMapper.toHttp(people)
+
+        await this.prisma.peoples.update(
+            {
+                where: {
+                    id
+                }, 
+                data
+            }
+        )
     }
+
     delete(id: number): Promise<void> {
         throw new Error("Method not implemented.");
     }

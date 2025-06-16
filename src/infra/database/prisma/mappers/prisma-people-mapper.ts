@@ -28,7 +28,8 @@ export class PrismaPeopleMapper {
             phone: person.phone,
             cpf: person.cpf,
             email: person.email,
-            peopleType: this.mapPeopleType(person.peopleType)
+            peopleType: this.mapPeopleType(person.peopleType),
+            status: person.status === 0 ? "INACTIVE" : "ACTIVE"
         }
     }
 

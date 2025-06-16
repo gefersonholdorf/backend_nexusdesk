@@ -84,12 +84,7 @@ export class People extends EntityBase<PeopleProps> {
 
     static create(props: PeopleProps, id?: UniqueEntityId) {
         return new People({
-            name: props.name,
-            enterprise: props.enterprise,
-            phone: props.phone,
-            cpf: props.cpf,
-            email: props.email,
-            peopleType: props.peopleType,
+            ...props,
             createdAt: props.createdAt ?? new Date(),
             updatedAt: props.updatedAt ?? new Date(),
             status: props.status ?? Status.ACTIVE
