@@ -18,6 +18,10 @@ import { GetOperatorByIdUseCase } from "src/domain/support-core/application/use-
 import { FetchOperatorsUseCase } from "src/domain/support-core/application/use-cases/operator/fetch-operators-use-case";
 import { CreateTicketController } from "./controllers/tickets/create-ticket-controller";
 import { CreateTicketUseCase } from "src/domain/support-core/application/use-cases/ticket/create-ticket-use-case";
+import { GetTicketByIdController } from "./controllers/tickets/get-ticket-by-id-controller";
+import { GetTicketByIdUseCase } from "src/domain/support-core/application/use-cases/ticket/get-ticket-by-id-use-case";
+import { TicketStatusTransitionController } from "./controllers/tickets/ticket-status-transition-controller";
+import { TicketStatusTransitionUseCase } from "src/domain/support-core/application/use-cases/ticket/ticket-status-transition-use-case";
 
 @Module({
     imports: [
@@ -26,12 +30,12 @@ import { CreateTicketUseCase } from "src/domain/support-core/application/use-cas
     controllers: [
         CreateClientController, UpdateClientController, GetClientByIdController, FetchClientsController,
         CreateOperatorController, UpdateOperatorController, GetOperatorByIdController, FetchOperatorsController,
-        CreateTicketController
+        CreateTicketController, GetTicketByIdController, TicketStatusTransitionController
     ],
     providers: [
         CreateClientUseCase, UpdateClientUseCase, GetClientByIdUseCase, FetchClientsUseCase,
         CreateOperatorUseCase, UpdateOperatorUseCase, GetOperatorByIdUseCase, FetchOperatorsUseCase,
-        CreateTicketUseCase
+        CreateTicketUseCase, GetTicketByIdUseCase, TicketStatusTransitionUseCase
     ]
 })
 export class HttpModule{}

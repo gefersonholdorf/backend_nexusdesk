@@ -15,15 +15,36 @@ export class PrismaTicketRepository implements TicketRepository {
 
         await this.prisma.tickets.create({data})
     }
-    findById(id: number): Promise<Ticket | null> {
-        throw new Error("Method not implemented.");
+
+    async findById(id: number): Promise<Ticket | null> {
+        const ticket = await this.prisma.tickets.findUnique({
+            where: {
+                id
+            }
+        })
+
+        if(!ticket) {
+            return null
+        }
+
+        return PrismaTicketMapper.toDomain(ticket)
     }
+
     findAll(): Promise<Ticket[]> {
         throw new Error("Method not implemented.");
     }
-    save(ticket: Ticket, id: number): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async save(ticket: Ticket, id: number): Promise<void> {
+        const data = PrismaTicketMapper.toPrisma(ticket)
+
+        await this.prisma.tickets.update({
+            data, 
+            where: {
+                id
+            }
+        })
     }
+
     delete(id: number): Promise<void> {
         throw new Error("Method not implemented.");
     }

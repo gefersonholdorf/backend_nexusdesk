@@ -47,8 +47,15 @@ export class Ticket extends EntityBase<TicketProps> {
     }
 
     set operator(operator: Operator) {
-        this.updatePropries()
         this.props.operator = operator
+    }
+
+    get client() {
+        return this.props.client!
+    }
+
+    set client(client: Client) {
+        this.props.client = client
     }
 
     get clientId() {
