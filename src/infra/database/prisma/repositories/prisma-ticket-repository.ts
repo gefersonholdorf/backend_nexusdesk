@@ -30,8 +30,27 @@ export class PrismaTicketRepository implements TicketRepository {
         return PrismaTicketMapper.toDomain(ticket)
     }
 
-    findAll(): Promise<Ticket[]> {
-        throw new Error("Method not implemented.");
+    async findAll(): Promise<Ticket[]> {
+        const tickets = await this.prisma.tickets.findMany()
+
+        return tickets.map((ticket) => PrismaTicketMapper.toDomain(ticket))
+    }
+
+    async findAllByPeopleId(id: number): Promise<Ticket[]> {
+        const tickets = await this.prisma.tickets.findMany({
+            where: {
+                OR: [
+                    {
+                        client_id: id
+                    },
+                    {
+                        operator_id: id
+                    }
+                ]
+            },
+        })
+
+        return tickets.map((ticket) => PrismaTicketMapper.toDomain(ticket))
     }
 
     async save(ticket: Ticket, id: number): Promise<void> {
@@ -45,8 +64,12 @@ export class PrismaTicketRepository implements TicketRepository {
         })
     }
 
-    delete(id: number): Promise<void> {
-        throw new Error("Method not implemented.");
+    async delete(id: number): Promise<void> {
+        await this.prisma.tickets.delete({
+            where: {
+                id
+            }
+        })
     }
 
 }

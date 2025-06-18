@@ -18,6 +18,7 @@ export class GetTicketByIdPresenter {
             clientPhone: client.phone,
             operatorName: operator ? operator.operator.name : null,
             ticketStatus: TransformTicketStatus.toTransform(ticket.ticketStatus),
+            closingDate: TransformDate.Format(ticket.closingDate!) ?? null,
             createdAt: TransformDate.Format(ticket.createdAt!),
             updatedAt: TransformDate.Format(ticket.updatedAt!)
         }

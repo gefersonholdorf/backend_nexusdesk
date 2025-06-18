@@ -33,6 +33,7 @@ model tickets {
   status                               tickets_status? @default(ACTIVE)
   createdAt                            DateTime?       @default(now()) @db.DateTime(0)
   updatedAt                            DateTime?       @default(now()) @db.DateTime(0)
+  closing_date                         DateTime?       @db.DateTime(0)
   peoples_tickets_client_idTopeoples   peoples         @relation("tickets_client_idTopeoples", fields: [client_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ticket_client")
   peoples_tickets_operator_idTopeoples peoples?        @relation("tickets_operator_idTopeoples", fields: [operator_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ticket_operator")
 

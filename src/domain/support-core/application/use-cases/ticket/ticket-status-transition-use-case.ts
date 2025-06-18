@@ -52,6 +52,10 @@ export class TicketStatusTransitionUseCase {
             return left(new InvalidTicketStatusTransitionError('An operator must be assigned to proceed with this operation.'))
         }
 
+        if(status === 6) {
+            ticket.closingDate = new Date()
+        }
+
         ticket.ticketStatus = status
         await this.ticketRepository.save(ticket, ticketId)
 

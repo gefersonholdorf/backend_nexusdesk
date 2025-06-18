@@ -11,6 +11,7 @@ export class PrismaTicketMapper {
             ticketStatus: ticket.ticketStatus,
             client_id: ticket.clientId.value,
             operator_id: ticket.operatorId?.value,
+            closing_date: ticket.closingDate,
             createdAt: ticket.createdAt,
             updatedAt: ticket.updatedAt,
             status: ticket.status == 0 ? "INACTIVE" : "ACTIVE",
@@ -24,6 +25,7 @@ export class PrismaTicketMapper {
             clientId: new UniqueEntityId(prismaTicket.client_id),
             operatorId: prismaTicket.operator_id ? new UniqueEntityId(prismaTicket.operator_id) : null,
             ticketStatus: prismaTicket.ticketStatus,
+            closingDate: prismaTicket.closing_date,
             createdAt: prismaTicket.createdAt,
             updatedAt: prismaTicket.updatedAt,
             status: prismaTicket.status == 'ACTIVE' ? 1 : 0

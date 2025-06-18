@@ -10,7 +10,7 @@ export class GetTicketByIdController {
     ) {}
 
     @Get()
-    @HttpCode(201)
+    @HttpCode(200)
     async handle(@Param('id', ParseIntPipe) ticketId: number) {
 
         const result = await this.getTicketByIdUseCase.execute({

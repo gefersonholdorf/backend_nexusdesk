@@ -32,3 +32,5 @@ CREATE TABLE tickets (
     CONSTRAINT fk_ticket_operator FOREIGN KEY (operator_id) REFERENCES peoples(id)
 );
 
+ALTER TABLE tickets ADD COLUMN closing_date DATETIME;
+

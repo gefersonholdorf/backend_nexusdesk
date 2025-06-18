@@ -89,8 +89,12 @@ export class PrismaPeopleRepository implements PeopleRepository {
         )
     }
 
-    delete(id: number): Promise<void> {
-        throw new Error("Method not implemented.");
+    async delete(id: number): Promise<void> {
+        await this.prisma.peoples.delete({
+            where: {
+                id
+            }
+        })
     }
     
 }

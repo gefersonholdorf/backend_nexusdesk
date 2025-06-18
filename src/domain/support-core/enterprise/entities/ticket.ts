@@ -14,6 +14,7 @@ export interface TicketProps {
     client?: Client | null
     operatorId?: UniqueEntityId | null
     operator?: Operator | null 
+    closingDate?: Date | null
     createdAt?: Date | null 
     updatedAt?: Date | null 
     status?: Status | null 
@@ -39,7 +40,12 @@ export class Ticket extends EntityBase<TicketProps> {
     }
 
     get operatorId() {
-        return this.props.operatorId
+        return this.props.operatorId!
+    }
+
+    set operatorId(operatorId: UniqueEntityId) {
+        this.updatePropries()
+        this.props.operatorId = operatorId
     }
 
     get operator() {
@@ -60,6 +66,14 @@ export class Ticket extends EntityBase<TicketProps> {
 
     get clientId() {
         return this.props.clientId
+    }
+
+    get closingDate() {
+        return this.props.closingDate!
+    }
+
+    set closingDate(closingDate: Date) {
+        this.props.closingDate = closingDate
     }
 
     get createdAt() {
@@ -96,6 +110,7 @@ export class Ticket extends EntityBase<TicketProps> {
             client: props.client ?? null,
             operatorId: props.operatorId ?? null,
             operator: props.operator ?? null,
+            closingDate: props.closingDate ?? null,
             createdAt: props.createdAt ?? new Date(),
             updatedAt: props.updatedAt ?? new Date(),
             status: props.status ?? Status.ACTIVE
